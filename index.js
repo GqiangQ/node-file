@@ -1,17 +1,20 @@
-const program = require('commander')
-program.option('-x, --xxx', 'xxxxxxxxxxxx')
-program
-  .command('add')
-  .description('add a task')
-  .action((...args) => {
-    console.log(args.slice(0,-1));
+const fs = require('fs')
+const homedir =process.env.HOME || require('os').homedir()
+const path = require('path')
+
+const dbPath = path.join(homedir, '.todo')
+const { db } = require('./db')
+
+module.exports.add = async (title) => {
+  let list = await db.read()
+  list.push({
+    title,
+    done:false
   })
+  console.log(list)
+  db.write(dbPath, JSON.stringify(list))
+}
 
-program
-  .command('clear')
-  .description('clear all task')
-  .action((...args) => {
-    console.log(args.slice(0,-1));
-  });  
-
-program.parse(process.argv)
+module.exports.clear = (...args) => {
+  db.write(dbPath, '[]')
+}
