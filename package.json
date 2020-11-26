@@ -1,7 +1,23 @@
 {
   "name": "node-file",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "index.js",
   "author": "GQiangQ <740407980@qq.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "bin": {
+    "t": "cli.js"
+  },
+  "files": [
+    "*.js"
+  ],
+  "scripts":{
+    "test": "jest"
+  },
+  "dependencies": {
+    "commander": "^3.0.2",
+    "inquirer": "^7.0.0"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
 }
