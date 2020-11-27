@@ -14,9 +14,13 @@ module.exports.db =  {
       })
     })
   },
-  write (path = dbPath, content) {
-    fs.writeFile(path,content, (err2, data) => {
-      if(err2)console.log(err2)
-    } )
+  write (content, path = dbPath, ) {
+    return new Promise((resolve, reject)=>{
+      fs.writeFile(path,content, (err2, data) => {
+        if(err2)reject(err2)
+        else resolve
+      } )
+    })
+    
   },
 }

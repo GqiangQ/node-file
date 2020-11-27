@@ -7,14 +7,17 @@ const { db } = require('./db')
 
 module.exports.add = async (title) => {
   let list = await db.read()
-  list.push({
-    title,
-    done:false
-  })
-  console.log(list)
-  db.write(dbPath, JSON.stringify(list))
+  list.push({title,done:false})
+  await db.write(JSON.stringify(list))
 }
-
-module.exports.clear = (...args) => {
-  db.write(dbPath, '[]')
+ 
+module.exports.clear = async() => {
+  await db.write(dbPath, '[]')
+}
+module.exports.look = async() => {
+  let list = await db.read()
+  console.log('任务列表：\n')
+  list.forEach((element,index) => {
+    console.log(`${index+1}  __ ${element.title}`)
+  });
 }
