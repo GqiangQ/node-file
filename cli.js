@@ -1,4 +1,4 @@
-
+#!/user/bin/env node
 const program = require('commander')
 const { add, clear, look } = require('./index')
 
